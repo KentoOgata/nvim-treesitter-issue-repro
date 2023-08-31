@@ -20,20 +20,9 @@ endfunction
 call s:PackAdd('nvim-treesitter/nvim-treesitter', '920b37260ebc720b0399bd12954fd2bf8bd18242')
 
 lua << EOF
-local parser_dir = ('%s/treesitter'):format(vim.fn.stdpath 'data')
-vim.opt.runtimepath:append(parser_dir)
 require('nvim-treesitter.configs').setup {
-  ensure_installed = {
-    'bash',
-    'vimdoc',
-    'vim',
-    'lua',
-  },
-  auto_install = true,
-  parser_install_dir = parser_dir,
   highlight = {
     enable = true,
-    -- disable = { 'vimdoc' },
   },
 }
 EOF
