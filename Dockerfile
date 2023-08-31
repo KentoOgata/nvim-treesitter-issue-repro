@@ -9,6 +9,13 @@ RUN apt-get update &&\
         git\
         build-essential
 
-COPY ["./init.vim", "/root/.config/nvim/init.vim"]
+ARG REMOTE=https://github.com/nvim-treesitter/nvim-treesitter.git
+ARG LOCAL=/root/.local/share/nvim/site/pack/github.com/start/nvim-treesitter
+ARG REV=920b37260ebc720b0399bd12954fd2bf8bd18242
+
+RUN git clone ${REMOTE} ${LOCAL} &&\
+        git -C ${LOCAL} checkout ${REV}
+
+COPY ["./init.lua", "/root/.config/nvim/init.lua"]
 
 ENTRYPOINT ["nvim"]
